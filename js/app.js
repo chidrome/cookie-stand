@@ -85,13 +85,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 var salesPerHour = (min, max, avgCookiePerSale, store, locationName) => {
   store.innerHTML = locationName.location;
+  let totalSales = 0;
   for(let i = 0; i < storeHours.length; i++){
     let liEl = document.createElement('li');
     let numberOfCustomersPerHour = Math.floor(Math.random() * (max - min) + min);
+    let salesThisHour = Math.round(numberOfCustomersPerHour * avgCookiePerSale);
     // liEl.textContent = `Number of customers for ${storeHours[i]} is ${numberOfCustomersPerHour} and avg cookies sold is ${Math.round(numberOfCustomersPerHour * avgCookiePerSale * 10) / 10}.`;
-    liEl.textContent = `${storeHours[i]}: ${Math.round(numberOfCustomersPerHour * avgCookiePerSale )}`;
+    liEl.textContent = `${storeHours[i]}: ${salesThisHour}`;
+    totalSales = totalSales + salesThisHour;
     store.appendChild(liEl);
   }
+  store.appendChild(document.createElement('li')).innerHTML = `Total is: ${totalSales}`;
 };
 
 var showAllStoreSales = () => {
