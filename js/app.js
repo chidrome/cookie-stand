@@ -68,31 +68,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ////////////////// HELPER FUNCTIONS //////////////////
 
-var salesPerHour = (min, max, avgCookiePerSale, store, locationName) => {
-  store.innerHTML = locationName.location;
+var salesPerHour = (min, max, avgCookiePerSale, store) => {
   let totalSales = 0;
   for(let i = 0; i < storeHours.length; i++){
     let liEl = document.createElement('li');
     let numberOfCustomersPerHour = Math.floor(Math.random() * (max - min) + min);
     let salesThisHour = Math.round(numberOfCustomersPerHour * avgCookiePerSale);
     // liEl.textContent = `Number of customers for ${storeHours[i]} is ${numberOfCustomersPerHour} and avg cookies sold is ${Math.round(numberOfCustomersPerHour * avgCookiePerSale * 10) / 10}.`;
-    liEl.textContent = `${storeHours[i]}: ${salesThisHour}`;
+    liEl.textContent = `${storeHours[i]}: ${salesThisHour} cookies`;
     totalSales = totalSales + salesThisHour;
     store.appendChild(liEl);
   }
-  store.appendChild(document.createElement('li')).innerHTML = `Total is: ${totalSales}`;
+  store.appendChild(document.createElement('li')).innerHTML = `Total is: ${totalSales} cookies for the day.`;
 };
 
 var showAllStoreSales = () => {
   // Pike place sales per hour
-  salesPerHour(pike.minCustomer, pike.maxCustomer, pike.avgCookiePerSale, pikeStore, pike);
+  salesPerHour(pike.minCustomer, pike.maxCustomer, pike.avgCookiePerSale, pikeStore);
   // Seatac sales per hour
-  salesPerHour(seatac.minCustomer, seatac.maxCustomer, seatac.avgCookiePerSale, seatacStore, seatac);
+  salesPerHour(seatac.minCustomer, seatac.maxCustomer, seatac.avgCookiePerSale, seatacStore);
   // Seattle Center
-  salesPerHour(seattleCenter.minCustomer, seattleCenter.maxCustomer, seattleCenter.avgCookiePerSale, seattleCenterStore, seattleCenter);
+  salesPerHour(seattleCenter.minCustomer, seattleCenter.maxCustomer, seattleCenter.avgCookiePerSale, seattleCenterStore);
   // Capitol hill
-  salesPerHour(capitolHill.minCustomer, capitolHill.maxCustomer, capitolHill.avgCookiePerSale, capitolHillStore, capitolHill);
+  salesPerHour(capitolHill.minCustomer, capitolHill.maxCustomer, capitolHill.avgCookiePerSale, capitolHillStore);
   // Alki
-  salesPerHour(alki.minCustomer, alki.maxCustomer, alki.avgCookiePerSale, alkiStore, alki);
+  salesPerHour(alki.minCustomer, alki.maxCustomer, alki.avgCookiePerSale, alkiStore);
 };
 
