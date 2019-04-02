@@ -7,7 +7,6 @@ var seattleCenterStore = document.getElementById('seattleCenter');
 var capitolHillStore = document.getElementById('capitolHill');
 var alkiStore = document.getElementById('alki');
 
-
 var pike = {
   location: '1st and Pike',
   minCustomer: 23,
@@ -74,7 +73,6 @@ var salesPerHour = (min, max, avgCookiePerSale, store) => {
     let liEl = document.createElement('li');
     let numberOfCustomersPerHour = Math.floor(Math.random() * (max - min) + min);
     let salesThisHour = Math.round(numberOfCustomersPerHour * avgCookiePerSale);
-    // liEl.textContent = `Number of customers for ${storeHours[i]} is ${numberOfCustomersPerHour} and avg cookies sold is ${Math.round(numberOfCustomersPerHour * avgCookiePerSale * 10) / 10}.`;
     liEl.textContent = `${storeHours[i]}: ${salesThisHour} cookies`;
     totalSales = totalSales + salesThisHour;
     store.appendChild(liEl);
