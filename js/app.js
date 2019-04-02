@@ -13,9 +13,6 @@ var pike = {
   minCustomer: 23,
   maxCustomer: 65,
   avgCookiePerSale: 6.3,
-  customersPerHour: [],
-  cookiesPerHour: [],
-  totalCookiesSoldForDay: 0
 };
 
 var seatac = {
@@ -23,9 +20,6 @@ var seatac = {
   minCustomer: 3,
   maxCustomer: 24,
   avgCookiePerSale: 1.2,
-  customersPerHour: [],
-  cookiesPerHour: [],
-  totalCookiesSoldForDay: 0
 };
 
 var seattleCenter = {
@@ -33,9 +27,6 @@ var seattleCenter = {
   minCustomer: 11,
   maxCustomer: 38,
   avgCookiePerSale: 3.7,
-  customersPerHour: [],
-  cookiesPerHour: [],
-  totalCookiesSoldForDay: 0
 };
 
 var capitolHill = {
@@ -43,9 +34,6 @@ var capitolHill = {
   minCustomer: 20,
   maxCustomer: 38,
   avgCookiePerSale: 2.3,
-  customersPerHour: [],
-  cookiesPerHour: [],
-  totalCookiesSoldForDay: 0
 };
 
 var alki = {
@@ -53,9 +41,6 @@ var alki = {
   minCustomer: 2,
   maxCustomer: 16,
   avgCookiePerSale: 4.6,
-  customersPerHour: [],
-  cookiesPerHour: [],
-  totalCookiesSoldForDay: 0
 };
 
 var storeHours = [
