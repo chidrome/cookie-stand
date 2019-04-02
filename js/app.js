@@ -6,6 +6,8 @@ var seatacStore = document.getElementById('seatac');
 var seattleCenterStore = document.getElementById('seattleCenter');
 var capitolHillStore = document.getElementById('capitolHill');
 var alkiStore = document.getElementById('alki');
+// create an array of the ul elements
+var storesArray = [pikeStore, seatacStore, seattleCenterStore, capitolHillStore, alkiStore];
 
 var pike = {
   location: '1st and Pike',
@@ -74,40 +76,34 @@ var storeHours = [
   '8pm',
 ];
 
+document.addEventListener('DOMContentLoaded', () => {
+
+  showAllStoreSales();
+
+});
+
 ////////////////// HELPER FUNCTIONS //////////////////
 
-var numberOfCustomersPerHour = (min, max) => {
-  let customersPerHour = []
-  for(let i = 0; i < storeHours.length; i++){
-    customersPerHour.push(Math.floor(Math.random() * (max - min) + min));
-  }
-  return customersPerHour;
-};
-
-var cookiesSoldPerHour = (arrayOfCustomersPerHour, avgCookiePerSale) => {
-  let cookiesPerHour = [];
-  for(let i = 0; i < arrayOfCustomersPerHour.length; i++){
-    cookiesPerHour.push(Math.round(arrayOfCustomersPerHour[i] * avgCookiePerSale * 10) / 10);
-  }
-  return cookiesPerHour;
-};
-
-var totalCookiesSoldForDay = (arrayOfCookiesSoldPerHour) => {
-  let totalCookies = 0;
-  for(let i = 0; i < arrayOfCookiesSoldPerHour.length; i++){
-    totalCookies = totalCookies + arrayOfCookiesSoldPerHour[i];
-  }
-  return totalCookies;
-};
-
-pikeStore.innerHTML = '1st and Pike';
-var salesPerHour = (min, max, avgCookiePerSale) => {
+var salesPerHour = (min, max, avgCookiePerSale, store, locationName) => {
+  store.innerHTML = locationName.location;
   for(let i = 0; i < storeHours.length; i++){
     let liEl = document.createElement('li');
     let numberOfCustomersPerHour = Math.floor(Math.random() * (max - min) + min);
     liEl.textContent = `Number of customers for ${storeHours[i]} is ${numberOfCustomersPerHour} and avg cookies sold is ${Math.round(numberOfCustomersPerHour * avgCookiePerSale * 10) / 10}.`;
-    pikeStore.appendChild(liEl);
+    store.appendChild(liEl);
   }
 };
 
-salesPerHour(23, 65, 6.3);
+var showAllStoreSales = () => {
+  // Pike place sales per hour
+  salesPerHour(pike.minCustomer, pike.maxCustomer, pike.avgCookiePerSale, pikeStore, pike);
+  // Seatac sales per hour
+  salesPerHour(seatac.minCustomer, seatac.maxCustomer, seatac.avgCookiePerSale, seatacStore, seatac);
+  // Seattle Center
+  salesPerHour(seattleCenter.minCustomer, seattleCenter.maxCustomer, seattleCenter.avgCookiePerSale, seattleCenterStore, seattleCenter);
+  // Capitol hill
+  salesPerHour(capitolHill.minCustomer, capitolHill.maxCustomer, capitolHill.avgCookiePerSale, capitolHillStore, capitolHill);
+  // Alki
+  salesPerHour(alki.minCustomer, alki.maxCustomer, alki.avgCookiePerSale, alkiStore, alki);
+};
+
