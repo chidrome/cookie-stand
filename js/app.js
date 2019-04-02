@@ -6,8 +6,7 @@ var seatacStore = document.getElementById('seatac');
 var seattleCenterStore = document.getElementById('seattleCenter');
 var capitolHillStore = document.getElementById('capitolHill');
 var alkiStore = document.getElementById('alki');
-// create an array of the ul elements
-var storesArray = [pikeStore, seatacStore, seattleCenterStore, capitolHillStore, alkiStore];
+
 
 var pike = {
   location: '1st and Pike',
@@ -89,7 +88,8 @@ var salesPerHour = (min, max, avgCookiePerSale, store, locationName) => {
   for(let i = 0; i < storeHours.length; i++){
     let liEl = document.createElement('li');
     let numberOfCustomersPerHour = Math.floor(Math.random() * (max - min) + min);
-    liEl.textContent = `Number of customers for ${storeHours[i]} is ${numberOfCustomersPerHour} and avg cookies sold is ${Math.round(numberOfCustomersPerHour * avgCookiePerSale * 10) / 10}.`;
+    // liEl.textContent = `Number of customers for ${storeHours[i]} is ${numberOfCustomersPerHour} and avg cookies sold is ${Math.round(numberOfCustomersPerHour * avgCookiePerSale * 10) / 10}.`;
+    liEl.textContent = `${storeHours[i]}: ${Math.round(numberOfCustomersPerHour * avgCookiePerSale )}`;
     store.appendChild(liEl);
   }
 };
