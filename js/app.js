@@ -1,47 +1,8 @@
 'use strict';
 
 // global variables
-var pikeStore = document.getElementById('pike');
-var seatacStore = document.getElementById('seatac');
-var seattleCenterStore = document.getElementById('seattleCenter');
-var capitolHillStore = document.getElementById('capitolHill');
-var alkiStore = document.getElementById('alki');
-
-var pike = {
-  location: '1st and Pike',
-  minCustomer: 23,
-  maxCustomer: 65,
-  avgCookiePerSale: 6.3,
-};
-
-var seatac = {
-  location: 'Seatac Airport',
-  minCustomer: 3,
-  maxCustomer: 24,
-  avgCookiePerSale: 1.2,
-};
-
-var seattleCenter = {
-  location: 'Seattle Center',
-  minCustomer: 11,
-  maxCustomer: 38,
-  avgCookiePerSale: 3.7,
-};
-
-var capitolHill = {
-  location: 'Capitol Hill',
-  minCustomer: 20,
-  maxCustomer: 38,
-  avgCookiePerSale: 2.3,
-};
-
-var alki = {
-  location: 'Alki',
-  minCustomer: 2,
-  maxCustomer: 16,
-  avgCookiePerSale: 4.6,
-};
-
+var allStores = [];
+var table = document.getElementById('storesTable');
 var storeHours = [
   '6am',
   '7am',
@@ -59,37 +20,50 @@ var storeHours = [
   '8pm',
 ];
 
+// wait till the dom content loads before running the scripts
 document.addEventListener('DOMContentLoaded', () => {
 
-  showAllStoreSales();
-
+  // add the header row
+  let headerTr = document.createElement('tr');
+  headerTr.textContent = 'Store Location';
+  for(let i = 0; i < storeHours.length; i++){
+    let elTd = document.createElement('td');
+    elTd.textContent = storeHours[i];
+    headerTr.appendChild(elTd);
+  }
+  table.appendChild(headerTr);
+  // loop through all the stores after constructing the objects
+  for(let i = 0; i < allStores.length; i++){
+    let elTr = document.createElement('tr');
+    elTr.textContent = allStores[i].location;
+    for(let j = 0; j < storeHours.length; j++){
+      let total = 0;
+      let elTd = document.createElement('td');
+      let numberOfCustomersPerHour = Math.floor(Math.random() * (allStores[i].maxCustomer - allStores[i].minCustomer) + allStores[i].minCustomer);
+      let salesThisHour = Math.round(numberOfCustomersPerHour * allStores[i].avgCookiePerSale);
+      total = total + salesThisHour;
+      elTd.textContent = salesThisHour;
+      elTr.appendChild(elTd);
+    }
+    table.appendChild(elTr);
+  }
 });
 
-////////////////// HELPER FUNCTIONS //////////////////
+// Constructor function
+function store(locationName, min, max, cookiePerSale, elId){
+  this.location = locationName;
+  this.minCustomer = min;
+  this.maxCustomer = max;
+  this.avgCookiePerSale = cookiePerSale;
+  this.elementId = elId;
+}
 
-var salesPerHour = (min, max, avgCookiePerSale, store) => {
-  let totalSales = 0;
-  for(let i = 0; i < storeHours.length; i++){
-    let liEl = document.createElement('li');
-    let numberOfCustomersPerHour = Math.floor(Math.random() * (max - min) + min);
-    let salesThisHour = Math.round(numberOfCustomersPerHour * avgCookiePerSale);
-    liEl.textContent = `${storeHours[i]}: ${salesThisHour} cookies`;
-    totalSales = totalSales + salesThisHour;
-    store.appendChild(liEl);
-  }
-  store.appendChild(document.createElement('li')).innerHTML = `Total is: ${totalSales} cookies for the day.`;
-};
+// create store instances and store it in an array
 
-var showAllStoreSales = () => {
-  // Pike place sales per hour
-  salesPerHour(pike.minCustomer, pike.maxCustomer, pike.avgCookiePerSale, pikeStore);
-  // Seatac sales per hour
-  salesPerHour(seatac.minCustomer, seatac.maxCustomer, seatac.avgCookiePerSale, seatacStore);
-  // Seattle Center
-  salesPerHour(seattleCenter.minCustomer, seattleCenter.maxCustomer, seattleCenter.avgCookiePerSale, seattleCenterStore);
-  // Capitol hill
-  salesPerHour(capitolHill.minCustomer, capitolHill.maxCustomer, capitolHill.avgCookiePerSale, capitolHillStore);
-  // Alki
-  salesPerHour(alki.minCustomer, alki.maxCustomer, alki.avgCookiePerSale, alkiStore);
-};
+allStores.push(new store('1st and Pike', 23, 65, 6.3, 'pike'));
+allStores.push(new store('Seatac Airport', 3, 24, 1.2, 'seatac'));
+allStores.push(new store('Seattle Center', 11, 38, 3.7, 'seattleCenter'));
+allStores.push(new store('Capitol Hill', 20, 38, 2.3, 'capitolHill'));
+allStores.push(new store('Alki', 2, 16, 4.6, 'alki'));
+
 
