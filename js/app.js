@@ -25,19 +25,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // add the header row
   let headerTr = document.createElement('tr');
+  let elTd = document.createElement('td');
   headerTr.textContent = 'Store Location';
+  elTd.textContent = 'Total';
   for(let i = 0; i < storeHours.length; i++){
     let elTd = document.createElement('td');
     elTd.textContent = storeHours[i];
     headerTr.appendChild(elTd);
   }
+  headerTr.appendChild(elTd);
   table.appendChild(headerTr);
   // loop through all the stores after constructing the objects
   for(let i = 0; i < allStores.length; i++){
     let elTr = document.createElement('tr');
+    let elTd = document.createElement('td');
+    let total = 0;
     elTr.textContent = allStores[i].location;
     for(let j = 0; j < storeHours.length; j++){
-      let total = 0;
       let elTd = document.createElement('td');
       let numberOfCustomersPerHour = Math.floor(Math.random() * (allStores[i].maxCustomer - allStores[i].minCustomer) + allStores[i].minCustomer);
       let salesThisHour = Math.round(numberOfCustomersPerHour * allStores[i].avgCookiePerSale);
@@ -45,6 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
       elTd.textContent = salesThisHour;
       elTr.appendChild(elTd);
     }
+    elTd.textContent = total; 
+    elTr.appendChild(elTd);
     table.appendChild(elTr);
   }
 });
@@ -65,5 +71,3 @@ allStores.push(new store('Seatac Airport', 3, 24, 1.2, 'seatac'));
 allStores.push(new store('Seattle Center', 11, 38, 3.7, 'seattleCenter'));
 allStores.push(new store('Capitol Hill', 20, 38, 2.3, 'capitolHill'));
 allStores.push(new store('Alki', 2, 16, 4.6, 'alki'));
-
-
