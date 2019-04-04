@@ -19,10 +19,46 @@ var storeHours = [
   '7pm',
   '8pm',
 ];
+var submitBtn = document.getElementById('submitButton');
+var store = document.getElementById('store');
+var min = document.getElementById('min');
+var max = document.getElementById('max');
+var avgCookie = document.getElementById('avgCookie');
 
 // wait till the dom content loads before running the scripts
 document.addEventListener('DOMContentLoaded', () => {
 
+  populateTable();
+  submitBtn.addEventListener('click', addStore);
+
+});
+
+// Constructor function
+function Store(locationName, min, max, cookiePerSale, elId){
+  this.location = locationName;
+  this.minCustomer = min;
+  this.maxCustomer = max;
+  this.avgCookiePerSale = cookiePerSale;
+  this.elementId = elId;
+  this.cookiesPerHour = [];
+}
+
+// create store instances and store it in an array
+
+allStores.push(new Store('1st and Pike', 23, 65, 6.3, 'pike'));
+allStores.push(new Store('Seatac Airport', 3, 24, 1.2, 'seatac'));
+allStores.push(new Store('Seattle Center', 11, 38, 3.7, 'seattleCenter'));
+allStores.push(new Store('Capitol Hill', 20, 38, 2.3, 'capitolHill'));
+allStores.push(new Store('Alki', 2, 16, 4.6, 'alki'));
+
+/////////////////// Helper functions ///////////////////
+
+function addStore(e){
+  e.preventDefault();
+  console.log(store.value, parseInt(min.value), parseInt(max.value), parseInt(avgCookie.value));
+}
+
+function populateTable(){
   // add the header row
   let headerTr = document.createElement('tr');
   let elTd = document.createElement('td');
@@ -56,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   // add the footer row
   let footerTr = document.createElement('tr');
+  let footerTd = document.createElement('td');
   let totalCookies = 0;
   footerTr.textContent = 'Hourly Total';
   for(let i = 0; i < storeHours.length; i++){
@@ -69,24 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
     totalCookies = totalCookies + hourlyTotal;
   }
   table.appendChild(footerTr);
-  elTd.textContent = totalCookies;
-  footerTr.appendChild(elTd);
-});
-
-// Constructor function
-function Store(locationName, min, max, cookiePerSale, elId){
-  this.location = locationName;
-  this.minCustomer = min;
-  this.maxCustomer = max;
-  this.avgCookiePerSale = cookiePerSale;
-  this.elementId = elId;
-  this.cookiesPerHour = [];
+  footerTd.textContent = totalCookies;
+  footerTr.appendChild(footerTd);
 }
-
-// create store instances and store it in an array
-
-allStores.push(new Store('1st and Pike', 23, 65, 6.3, 'pike'));
-allStores.push(new Store('Seatac Airport', 3, 24, 1.2, 'seatac'));
-allStores.push(new Store('Seattle Center', 11, 38, 3.7, 'seattleCenter'));
-allStores.push(new Store('Capitol Hill', 20, 38, 2.3, 'capitolHill'));
-allStores.push(new Store('Alki', 2, 16, 4.6, 'alki'));
