@@ -19,17 +19,13 @@ var storeHours = [
   '7pm',
   '8pm',
 ];
-var submitBtn = document.getElementById('submitButton');
-var store = document.getElementById('store');
-var min = document.getElementById('min');
-var max = document.getElementById('max');
-var avgCookie = document.getElementById('avgCookie');
+var addStoreForm = document.getElementById('addNewStore');
 
 // wait till the dom content loads before running the scripts
 document.addEventListener('DOMContentLoaded', () => {
 
   populateTable();
-  submitBtn.addEventListener('click', addStore);
+  addStoreForm.addEventListener('submit', addStore);
 
 });
 
@@ -55,7 +51,8 @@ allStores.push(new Store('Alki', 2, 16, 4.6, 'alki'));
 
 function addStore(e){
   e.preventDefault();
-  console.log(store.value, parseInt(min.value), parseInt(max.value), parseInt(avgCookie.value));
+  console.log(e);
+
 }
 
 function populateTable(){

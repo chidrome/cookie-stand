@@ -9,13 +9,17 @@
 </head>
 <body>
   <h2>Let's Add/Update a store</h2>
-  <form>
-      <input type="text" id="store" placeholder="Enter Store to Add/Update">
-      <input type="text" id="min" placeholder="Enter Min">
-      <input type="text" id="max" placeholder="Enter Max">
-      <input type="text" id="avgCookie" placeholder="Enter Avg Cookies Sold">
-      <input type="submit" onSubmit=addStore() id="submitButton">
-    </form>
+  <form id="addNewStore" onsubmit="addStore()">
+    <label for="store">Store Name</label>
+    <input type="text" name="store" id="store" placeholder="Enter Store to Add/Update">
+    <label for="min">Min</label>
+    <input type="text" name="min" id="min" placeholder="Enter Min">
+    <label for="max">Max</label>
+    <input type="text" name="max" id="max" placeholder="Enter Max">
+    <label for="avgCookie">Average Cookies Per Customer</label>
+    <input type="text" name="avgCookie" id="avgCookie" placeholder="Enter Avg Cookies Sold">
+    <input type="submit" id="submitButton">
+  </form>
   <h2>Salmon Cookies Sales</h2>
 
   <table id="storesTable">
